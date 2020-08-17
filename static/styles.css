@@ -20,6 +20,9 @@
     padding-top: 0;
     padding-bottom: 0;
 }
+.signup-form {
+    background-color: #e9ecef;
+}
 .list-group-item {
     padding: .25rem 0;
 }
@@ -39,6 +42,7 @@ tr td, tr th {
 }
 .roster img {
     max-width:100px;
+    margin: 5px;
 }
 
 .btn-container {
@@ -48,27 +52,37 @@ tr td, tr th {
 }
 .roster-btn {
     background-color: #555555; 
-    float: right;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+}
+.roster-btn button {
+    min-width: 100px;
+    max-width: 500px;
+    min-height: 2rem;
+    margin: 5px;
 }
 .roster-box {
+    display: flex;
     background-color: #555555; 
     width: 100%;
     min-height:100px;
     max-height:15%;
+    flex-direction: column;
+    align-items: center;
 }
 .roster {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    flex-shrink: 1;
+    justify-content: center;
     height: auto;
 }
-@media (max-width: 767.98px) { 
-    .roster-btn {
-        display: block;
-        width: 100%;
-        margin: 5px auto;
-    }
+
+ @media (min-width: 992px) {
+     .roster-btn{
+         flex-direction: column ;
+     }
+     .roster-box{
+         flex-direction: row;
+     }
  }

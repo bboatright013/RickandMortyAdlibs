@@ -1,49 +1,35 @@
 {% extends 'base.html'%}
 {% block main %}
 
-{{words['word1']}}
-{{words['word1']}}
-{{words['word2']}}
-{{words['word3']}}
-{{words['word4']}}
-{{words['word5']}}
-{{words['word6']}}
-{{words['word7']}}
-{{words['word8']}}
-{{words['word9']}}
-{{words['word10']}}
+
 
 <div class="table-responsive table-borderless">
     <table class="table">
       <tbody class="result-table">
         <tr>
             <td scope="row" class="char1-image"></td>
-            <td><p>*BUUUURRRRRPP* Listen <span class="char2-name"></span>, you dont understand what these ricks are capable of... They're like dictators Morty!</p></td>
+            <td><p><span class="char1-name"></span>*BUUUURRRRRPP* Listen <span class="char2-name"></span>, you dont understand what these ricks are capable of... They're like dictators Morty!</p></td>
           </tr>
           <tr>
             <td scope="row" class="char2-image"></td>
-            <td><p>What are you saying <span class="char1-name"></span>!? you mean theyre Ricktators?</p></td>
+            <td><p><span class="char2-name"></span>, "What are you saying <span class="char1-name"></span>!? you mean theyre Ricktators?"</p></td>
           </tr>
           <tr>
-            <td scope="row" class="char1-image"></td>
-            <td><p>*BUUUURRRRRPP* Listen <span class="char2-name"></span>, you dont understand what these ricks are capable of... They're like dictators Morty!</p></td>
+            <td scope="row" class="char3-image"></td>
+            <td><p><span class="char3-name"></span>, "Quick! Grab the {{words['word1']}} out of the {{words['word3']}} and lets go!"</p></td>
           </tr>
           <tr>
-            <td scope="row" class="char2-image"></td>
-            <td><p>What are you saying <span class="char1-name"></span>!? you mean theyre Ricktators?</p></td>
+            <td scope="row" class="char4-image"></td>
+            <td><p><span class="char4-name"></span>, "Here they come!" and pulled out the {{words['word2']}} to fend of the seal team ricks</p></td>
           </tr>
           <tr>
-            <td scope="row" class="char1-image"></td>
-            <td><p>*BUUUURRRRRPP* Listen <span class="char2-name"></span>, you dont understand what these ricks are capable of... They're like dictators Morty!</p></td>
+            <td scope="row" class="char5-image"></td>
+            <td><p><span class="char5-name"></span>, "{{words['word5']}} {{words['word6']}} the {{words['word4']}} {{words['word1']}}" <span class="char5-name"></span> shouted at the ricks.</p></td>
           </tr>
-          <tr>
-            <td scope="row" class="char2-image"></td>
-            <td><p>What are you saying <span class="char1-name"></span>!? you mean theyre Ricktators?</p></td>
-          </tr>
+
       </tbody>
     </table>
-
-<button id="save_post" class="btn btn-primary">Save</button>
+  <button id="save_post" class="btn btn-primary m-2">Save</button>
 
 {% endblock %}
 

@@ -8,14 +8,48 @@
       <form method="POST" id="user_form">
         {{ form.hidden_tag() }}
 
-        {% for field in form if field.widget.input_type != 'hidden' %}
-          {% for error in field.errors %}
-            <span class="text-danger">{{ error }}</span>
-          {% endfor %}
-          {{ field(placeholder=field.label.text, class="form-control") }}
-        {% endfor %}
+        <div class="form-group row">
+            <div class="col-3 text-right">Object:</div> <div class="col-9">{{ form.word1(class="form_control") }}</div>
+            {% if form.word1.errors %}
+                <ul class="errors">{% for error in form.word1.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div>
 
-        <button class="btn btn-primary btn-block btn-lg">Submit!</button>
+        <div class="form-group row">
+            <div class="col-3 text-right">Weapon:</div> <div class="col-9">{{ form.word2(class="form_control") }}</div>
+            {% if form.word2.errors %}
+                <ul class="errors">{% for error in form.word2.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div>
+        <div class="form-group row">
+            <div class="col-3 text-right">Place:</div> <div class="col-9">{{ form.word3(class="form_control") }}</div>
+            {% if form.word3.errors %}
+                <ul class="errors">{% for error in form.word3.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div>
+        <div class="form-group row">
+            <div class="col-3 text-right">Adjective:</div> <div class="col-9">{{ form.word4(class="form_control") }}</div>
+            {% if form.word4.errors %}
+                <ul class="errors">{% for error in form.word4.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div>
+        <div class="form-group row">
+            <div class="col-3 text-right">Adverb:</div> <div class="col-9">{{ form.word5(class="form_control") }}</div>
+            {% if form.word5.errors %}
+                <ul class="errors">{% for error in form.word5.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div>
+        <div class="form-group row">
+            <div class="col-3 text-right">Verb:</div> <div class="col-9">{{ form.word6(class="form_control") }}</div>
+            {% if form.word6.errors %}
+                <ul class="errors">{% for error in form.word6.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col9">        <button class="btn btn-primary btn-block btn-lg">Submit!</button>
+            </div>
+        </div>
       </form>
     </div>
   </div>

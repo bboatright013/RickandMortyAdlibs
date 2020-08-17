@@ -146,7 +146,7 @@ def adlibs():
 
 @app.route('/adlib_templates/one', methods=["POST","GET"])
 def ricktatorship():
-    """ get the adlib choices page """
+    """ get the adlib form and post it """
     form = AdlibForm()
     if form.validate_on_submit():
         words = form.data
@@ -156,7 +156,7 @@ def ricktatorship():
 
 @app.route('/adlib_templates/two', methods=["POST","GET"])
 def meseecks():
-    """ get the adlib choices page """
+    """ get the adlib form and post it """
     form = AdlibForm()
     if form.validate_on_submit():
         words = form.data
@@ -165,7 +165,7 @@ def meseecks():
 
 @app.route('/adlib_templates/three', methods=["POST","GET"])
 def anatomy():
-    """ get the adlib choices page """
+    """ get the adlib form and post it """
     form = AdlibForm()
     if form.validate_on_submit():
         words = form.data
@@ -189,6 +189,10 @@ def adlib_data_store():
     except:
         return("Error", 500)
 
-
 #############################################################################
-# 
+# go to user profile page and fetch their saved adlibs
+
+@app.route('/profile')
+def profile_page():
+    adlibs = Adlib.query.filter_by(user_id = g.user.id).order_by(Adlib.id.desc()).all()
+    return render_template('profile.html', adlibs=adlibs, user=g.user)

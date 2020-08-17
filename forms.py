@@ -27,13 +27,10 @@ class LoginForm(FlaskForm):
 
 class AdlibForm(FlaskForm):
 
-    word1 = StringField('Noun One', validators=[DataRequired()], )
-    word2 = StringField('Noun Two', validators=[DataRequired()])
-    word3 = StringField('Noun Three', validators=[DataRequired()])
-    word4 = StringField('Noun Four', validators=[DataRequired()])
-    word5 = StringField('Adjective One', validators=[DataRequired()])
-    word6 = StringField('Adjective Two', validators=[DataRequired()])
-    word7 = StringField('Adjective Three', validators=[DataRequired()])
-    word8 = StringField('Adverb One', validators=[DataRequired()])
-    word9 = StringField('Adverb Two', validators=[DataRequired()])
-    word10 = StringField('Adverb Three', validators=[DataRequired()])
+    word1 = StringField('Object', validators=[DataRequired()], )
+    word2 = StringField('Weapon', validators=[DataRequired()])
+    word3 = StringField('Place', validators=[DataRequired()])
+    word4 = StringField('Adjective', validators=[DataRequired()])
+    word5 = StringField('Adverb', validators=[DataRequired()])
+    word6 = StringField('Verb', validators=[DataRequired()])
+

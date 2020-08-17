@@ -1,4 +1,5 @@
 $(document).ready(get_characters);
+sessionStorage.clear();
 
 const $new_team = $('.new-team');
 const $confirm_team = $('.confirm-team');
@@ -24,6 +25,10 @@ $roster.empty();
 
 //commit the roster to sessionStorage for later use and run animations
 $confirm_team.on('click', function(e){
+if(roster.length < 5){
+    alert(`Please add ${5- roster.length} more cast members!`)
+    return;
+}
 let start_count = roster.length
 for(let x = 0; x <= start_count; x++){
     sessionStorage.setItem(`character${x+1}`,roster[x])

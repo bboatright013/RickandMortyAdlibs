@@ -1,32 +1,40 @@
 {%extends 'base.html'%}
 
 {%block main%}
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Choose Your Adventure!</th>
+    
+          </tr>
+        </thead>
+        <tbody>
+          <tr scope="row">
+              <td>
+                <a href="/adlib_templates/one">Escape the Ricktatorship!</a>  
+              </td>
+    
+          </tr>
+          <tr scope="row">
+              <td>
+                <a href="/adlib_templates/two">Meseeks and Repairs</a>
+              </td>
+          </tr>
+          <tr scope="row">
+              <td>
+                <a href="/adlib_templates/three">Anatomy World</a>
+              </td>
+          </tr>
+        </tbody>
+    </table>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
 
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Choose Your Adventure!</th>
-
-      </tr>
-    </thead>
-    <tbody>
-      <tr scope="row">
-          <td>
-            <a href="/adlib_templates/one">Escape the Ricktatorship!</a>  
-          </td>
-
-      </tr>
-      <tr scope="row">
-          <td>
-            <a href="/adlib_templates/two">Meseeks and Repairs</a>
-          </td>
-      </tr>
-      <tr scope="row">
-          <td>
-            <a href="/adlib_templates/three">Anatomy World</a>
-          </td>
-      </tr>
-    </tbody>
-</table>
 
 {%endblock%}
