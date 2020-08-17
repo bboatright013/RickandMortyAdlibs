@@ -12,27 +12,17 @@
         <th scope="col">Dimension</th>
     </tr>
   </thead>
-  <tbody>
-{% for location in response['results'] %}
+  <tbody class="location-table">
 
-    <tr>
-      <th scope="row">{{location.id}}</th>
-      <td>{{location.name}}</td>
-      <td>{{location.type}}</td>
-      <td>{{location.dimension}}</td>
-    </tr>
-{%endfor%}
 
   </tbody>
 </table>
 
-<div class="container d-flex" style="justify-content: space-between;">
-{%if response['info']['prev'] != None %}
-    <a href="/database/locations/prev"><button class="btn btn-primary">Back</button></a>
-{%endif%}
-    <span>{{response['info'].pages}} pages</span>
-{%if response['info']['next'] != None %}
-    <a href="/database/locations/next"><button class="btn btn-primary">Next</button></a>
-{%endif%}
-</div>
+<div class="btn-container d-flex" style="justify-content: space-between;">
+  <button class="btn btn-primary back">Back</button><button class="btn btn-primary next">Next</button>
+  </div>
+{% endblock %}
+
+{%block pagescript %}
+<script src='/static/location_script.js'></script>
 {% endblock %}

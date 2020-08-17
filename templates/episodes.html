@@ -12,28 +12,16 @@
         <th scope="col">Episode</th>
     </tr>
   </thead>
-  <tbody>
-{% for episode in response['results'] %}
-
-    <tr>
-      <th scope="row">{{episode.id}}</th>
-      <td>{{episode.name}}</td>
-      <td>{{episode.air_date}}</td>
-      <td>{{episode.episode}}</td>
-    </tr>
-{%endfor%}
+  <tbody class="episode-table">
 
   </tbody>
 </table>
 
+<div class="btn-container d-flex" style="justify-content: space-between;">
+  <button class="btn btn-primary back">Back</button><button class="btn btn-primary next">Next</button>
+  </div>
+{% endblock %}
 
-<div class="container d-flex" style="justify-content: space-between;">
-{%if response['info']['prev'] != None %}
-    <a href="/database/episodes/prev"><button class="btn btn-primary">Back</button></a>
-{%endif%}
-    <span>{{response['info'].pages}} pages</span>
-{%if response['info']['next'] != None %}
-    <a href="/database/episodes/next"><button class="btn btn-primary">Next</button></a>
-{%endif%}
-</div>
+{%block pagescript %}
+<script src='/static/episode_script.js'></script>
 {% endblock %}
