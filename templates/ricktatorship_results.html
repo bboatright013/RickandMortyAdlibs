@@ -1,0 +1,52 @@
+{% extends 'base.html'%}
+{% block main %}
+
+{{words['word1']}}
+{{words['word1']}}
+{{words['word2']}}
+{{words['word3']}}
+{{words['word4']}}
+{{words['word5']}}
+{{words['word6']}}
+{{words['word7']}}
+{{words['word8']}}
+{{words['word9']}}
+{{words['word10']}}
+
+<div class="table-responsive table-borderless">
+    <table class="table">
+      <tbody class="result-table">
+        <tr>
+            <td scope="row" class="char1-image"></td>
+            <td><p>*BUUUURRRRRPP* Listen <div class="char2-name"></div>, you dont understand what these ricks are capable of... They're like dictators Morty!</p></td>
+          </tr>
+          <tr>
+            <td scope="row" class="char2-image"></td>
+            <td><p>What are you saying <div class="char1-name"></div>!? you mean theyre Ricktators?</p></td>
+          </tr>
+          <tr>
+            <td scope="row" class="char1-image"></td>
+            <td><p>*BUUUURRRRRPP* Listen <div class="char2-name"></div>, you dont understand what these ricks are capable of... They're like dictators Morty!</p></td>
+          </tr>
+          <tr>
+            <td scope="row" class="char2-image"></td>
+            <td><p>What are you saying <div class="char1-name"></div>!? you mean theyre Ricktators?</p></td>
+          </tr>
+          <tr>
+            <td scope="row" class="char1-image"></td>
+            <td><p>*BUUUURRRRRPP* Listen <div class="char2-name"></div>, you dont understand what these ricks are capable of... They're like dictators Morty!</p></td>
+          </tr>
+          <tr>
+            <td scope="row" class="char2-image"></td>
+            <td><p>What are you saying <div class="char1-name"></div>!? you mean theyre Ricktators?</p></td>
+          </tr>
+      </tbody>
+    </table>
+
+<button id="save_post" class="btn btn-primary">Save</button>
+
+{% endblock %}
+
+{%block pagescript %}
+<script src='/static/result_scripts.js'></script>
+{% endblock %}

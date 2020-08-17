@@ -1,0 +1,194 @@
+import os
+import requests
+
+from flask import Flask, render_template, request, flash, redirect, session, g, jsonify, json
+from flask_debugtoolbar import DebugToolbarExtension
+from sqlalchemy.exc import IntegrityError
+
+from forms import UserForm, LoginForm, AdlibForm
+from models import db, connect_db, User, Adlib, Votes 
+
+
+CURR_USER_KEY = "curr_user"
+base_api_url = 'https://rickandmortyapi.com/api/'
+
+app = Flask(__name__)
+
+# Get DB_URI from environ variable (useful for production/testing) or,
+# if not set there, use development local db.
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+    os.environ.get('DATABASE_URL', 'postgres:///capstone1'))
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ECHO'] = False
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "it's a secret")
+toolbar = DebugToolbarExtension(app)
+
+connect_db(app)
+db.create_all()
+
+##############################################################################
+# Home Page
+
+@app.route('/')
+def home_page():
+    return render_template('home.html')
+
+
+##############################################################################
+# User signup/login/logout
+
+
+@app.before_request
+def add_user_to_g():
+    """If we're logged in, add curr user to Flask global."""
+    if CURR_USER_KEY in session:
+        g.user = User.query.get(session[CURR_USER_KEY])
+    else:
+        g.user = None
+
+def user_login(user):
+    """Log in user."""
+    session[CURR_USER_KEY] = user.id
+
+def user_logout():
+    """Logout user."""
+    if CURR_USER_KEY in session:
+        del session[CURR_USER_KEY]
+
+@app.route('/signup', methods=["GET", "POST"])
+def signup():
+    """Handle user signup.
+    Create new user and add to DB. Redirect to home page.
+    If form not valid, present form.
+    If there is already a user with that username: flash message
+    and re-present form.
+    """
+
+    form = UserForm()
+    if form.validate_on_submit():
+        try:
+            user = User.signup(
+                username=form.username.data,
+                password=form.password.data,
+                email=form.email.data,
+            )
+            db.session.commit()
+        except IntegrityError:
+            flash("Username already taken", 'danger')
+            return render_template('signup.html', form=form)
+
+        user_login(user)
+        return redirect("/")
+
+    else:
+        return render_template('signup.html', form=form)
+
+
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    """Handle user login."""
+
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.authenticate(form.username.data, form.password.data)
+        if user:
+            user_login(user)
+            flash(f"Hello, {user.username}!")
+            return redirect("/")
+        flash("Invalid credentials.")
+    return render_template('login.html', form=form)
+
+
+@app.route('/logout')
+def logout():
+    """Handle logout of user."""
+
+    session.pop(CURR_USER_KEY)
+    return redirect('/')
+
+##############################################################################
+# Characters Page
+
+@app.route('/database/characters')
+def characters():
+    """ get the first page of characters"""
+    return render_template('characters.html')
+
+
+
+##############################################################################
+# Locations Page
+
+@app.route('/database/locations')
+def locations():
+    """ get the first page of Locations"""
+    return render_template('location.html')
+
+
+##############################################################################
+# episodes Page
+
+@app.route('/database/episodes')
+def episodes():
+    """ get the first page of Locations"""
+    return render_template('episodes.html')
+
+
+##############################################################################
+# adlib Pages
+
+@app.route('/adlib_templates')
+def adlibs():
+    """ get the adlib choices page """
+    return render_template('adlibs.html')
+
+@app.route('/adlib_templates/one', methods=["POST","GET"])
+def ricktatorship():
+    """ get the adlib choices page """
+    form = AdlibForm()
+    if form.validate_on_submit():
+        words = form.data
+        return render_template ('ricktatorship_results.html',words=words)
+    return render_template('ricktatorship.html', form=form)
+
+
+@app.route('/adlib_templates/two', methods=["POST","GET"])
+def meseecks():
+    """ get the adlib choices page """
+    form = AdlibForm()
+    if form.validate_on_submit():
+        words = form.data
+        return render_template('meseecks_results', words=words)
+    return render_template('meseecks.html', form=form)
+
+@app.route('/adlib_templates/three', methods=["POST","GET"])
+def anatomy():
+    """ get the adlib choices page """
+    form = AdlibForm()
+    if form.validate_on_submit():
+        words = form.data
+        return render_template('anatomy_results', words=words)
+    return render_template('anatomy.html', form=form)
+
+##############################################################################
+#add an adlib from a user 
+
+@app.route('/add_lib', methods=['POST'])
+def adlib_data_store():
+    """create an adlib object"""
+    try:
+        print(request.json['result_text'])
+        print(g.user.id)
+        new_adlib = Adlib(text=request.json['result_text'], user_id=g.user.id)
+        db.session.add(new_adlib)
+        db.session.commit()
+        print(new_adlib)
+        return ("Success!", 201 )
+    except:
+        return("Error", 500)
+
+
+#############################################################################
+# 

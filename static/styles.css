@@ -1,0 +1,74 @@
+
+.nav-item {
+    font-size: .9rem;
+}
+
+.card-deck {
+    justify-content: space-around;
+}
+
+.card-deck .card {
+    flex: none;
+    max-width: 225px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+.navbar {
+    padding: 0.1rem .4rem;
+}
+.navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.list-group-item {
+    padding: .25rem 0;
+}
+.list-group-item-label {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+.dropdown-item:hover {
+    background-color: rgba(0,0,0,.3)
+}
+tr td img {
+   max-width: 100px;
+   min-width: 50px;
+}
+tr td, tr th {
+    vertical-align: middle !important;
+}
+.roster img {
+    max-width:100px;
+}
+
+.btn-container {
+  position: relative;
+  width: 50%;
+
+}
+.roster-btn {
+    background-color: #555555; 
+    float: right;
+    display: flex;
+    flex-direction: column;
+}
+.roster-box {
+    background-color: #555555; 
+    width: 100%;
+    min-height:100px;
+    max-height:15%;
+}
+.roster {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-shrink: 1;
+    height: auto;
+}
+@media (max-width: 767.98px) { 
+    .roster-btn {
+        display: block;
+        width: 100%;
+        margin: 5px auto;
+    }
+ }

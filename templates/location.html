@@ -1,0 +1,38 @@
+{% extends 'base.html'%}
+
+{%block main%}
+
+<div class="table-responsive">
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Type</th>
+        <th scope="col">Dimension</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for location in response['results'] %}
+
+    <tr>
+      <th scope="row">{{location.id}}</th>
+      <td>{{location.name}}</td>
+      <td>{{location.type}}</td>
+      <td>{{location.dimension}}</td>
+    </tr>
+{%endfor%}
+
+  </tbody>
+</table>
+
+<div class="container d-flex" style="justify-content: space-between;">
+{%if response['info']['prev'] != None %}
+    <a href="/database/locations/prev"><button class="btn btn-primary">Back</button></a>
+{%endif%}
+    <span>{{response['info'].pages}} pages</span>
+{%if response['info']['next'] != None %}
+    <a href="/database/locations/next"><button class="btn btn-primary">Next</button></a>
+{%endif%}
+</div>
+{% endblock %}

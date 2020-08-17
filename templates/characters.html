@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+
+{%block main%}
+<div class="container-fluid p-0 roster-box">
+  <div class="roster container-fluid">
+
+  </div>
+  <div class="roster-btn">
+    <button class="new-team btn btn-danger m-1">Shake up the Roster!</button>
+    <button class="confirm-team btn btn-primary m-1">Lock it in!</button>
+  </div>
+</div>
+
+<div class="table-responsive">
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Species</th>
+        <th scope="col">Origin</th>
+        <th scope="col">Draft</th>
+    </tr>
+  </thead>
+  <tbody class="characters-table">
+
+
+  </tbody>
+</table>
+
+<div class="btn-container d-flex" style="justify-content: space-between;">
+<button class="btn btn-primary back">Back</button><button class="btn btn-primary next">Next</button>
+</div>
+{% endblock %}
+
+{%block pagescript %}
+<script src='/static/char_scripts.js'></script>
+{% endblock %}
