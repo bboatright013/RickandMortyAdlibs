@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, flash, redirect, session, g, 
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
-from forms import UserForm, LoginForm, AdlibForm
+from forms import UserForm, LoginForm, AdlibForm, UserEditForm
 from models import db, connect_db, User, Adlib, Votes 
 
 
@@ -17,7 +17,8 @@ app = Flask(__name__)
 # Get DB_URI from environ variable (useful for production/testing) or,
 # if not set there, use development local db.
 app.config['SQLALCHEMY_DATABASE_URI'] = (
-    os.environ.get('DATABASE_URL', 'postgres:///capstone1'))
+    os.environ.get('postgres://xuugpcndclicri:b60b7a9d1678e42227ce7cfd94512ec643b6250f686a63d49320d2402ada3150@ec2-52-23-86-208.compute-1.amazonaws.com:5432/ddn8kpc58th9b6',
+     'postgres:///capstone1'))
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
@@ -85,6 +86,40 @@ def signup():
     else:
         return render_template('signup.html', form=form)
 
+
+@app.route('/profile/edit', methods=["GET", "POST"])
+def profile_edit():
+    """Update profile for current user."""
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+    user = User.query.get_or_404(g.user.id)
+    form = UserEditForm()
+    if form.validate_on_submit():
+        try:
+            if User.query.filter_by(username=form.username.data).first() == None or user.username == form.username.data:
+                checkUser = user.username
+                authuser = User.authenticate(checkUser,form.password.data)
+                if authuser:
+                    user.username = form.username.data
+                    user.email = form.email.data
+                    flash("Profile Updated", 'success')
+                    db.session.commit()
+                    return redirect('/profile')
+                else:
+                    flash("Invalid password", 'danger')
+                    return render_template('edit_user.html', form=form)
+            else:
+                flash("Username already taken", 'danger')
+                return render_template('edit_user.html', form=form)
+
+        except IntegrityError:
+            flash("Username already taken", 'danger')
+            return render_template('edit_user.html', form=form)
+    else:
+        form.username.data = user.username
+        form.email.data = user.email
+        return render_template('edit_user.html', form=form)
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
@@ -189,6 +224,15 @@ def adlib_data_store():
     except:
         return("Error", 500)
 
+
+@app.route(f'/delete_lib/<int:adlib_id>', methods=['POST'])
+def adlib_data_delete(adlib_id):
+    """delete an adlib"""
+    sunset_adlib = Adlib.query.get_or_404(adlib_id)
+    print(sunset_adlib)
+    db.session.delete(sunset_adlib)
+    db.session.commit()
+    return redirect('/profile')
 #############################################################################
 # go to user profile page and fetch their saved adlibs
 

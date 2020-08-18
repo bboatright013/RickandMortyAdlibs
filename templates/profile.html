@@ -7,7 +7,7 @@
     </div>
     <div class="card-body">
       <h5 class="card-title"><span>Email:</span>{{user.email}}</h5>
-      <a href="#" class="btn btn-primary">Edit (under construction)</a>
+      <a href="/profile/edit" class="btn btn-primary">Edit</a>
     </div>
   </div>
 
@@ -15,13 +15,15 @@
     <table class="table table">
       <thead class="thead-light">
         <tr>
-            <th scope="col">Saved Adlibs</th>
+            <th scope="col">Saved Stories</th>
+            <th scope="col">Delete</th>
         </tr>
       </thead>
       <tbody class="story-table">
     {%for story in adlibs %}
     <tr>
         <td>{{story.text}}</td>
+        <td><button data-id="{{story.id}}" class="btn btn-primary">X</button></td>
     </tr>
     {%endfor%}
       </tbody>
@@ -30,3 +32,6 @@
 
 
 {%endblock%}
+{%block pagescript %}
+<script src='/static/profile.js'></script>
+{% endblock %}

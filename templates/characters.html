@@ -1,7 +1,16 @@
 {% extends 'base.html'%}
 
 {%block main%}
+
+<div class="character-popup">
+<div class="character-popup-modal">
+     <h2>Choose Your Story Template!</h2>
+     <a href="/adlib_templates">Click to continue</a>
+
+</div>
+</div>
 <div class="container-fluid p-0 roster-box">
+
   <div class="roster-btn">
     <button class="new-team btn btn-danger">Reset</button>
     <button class="confirm-team btn btn-primary">Lock in</button>
@@ -33,6 +42,9 @@
 <div class="btn-container d-flex" style="justify-content: space-between;">
 <button class="btn btn-primary back">Back</button><button class="btn btn-primary next">Next</button>
 </div>
+
+
+
 {% endblock %}
 
 {%block pagescript %}

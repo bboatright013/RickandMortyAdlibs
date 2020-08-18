@@ -10,21 +10,21 @@ async function get_characters(){
         const char3 = sessionStorage.getItem("character3");
         const char4 = sessionStorage.getItem("character4");
         const char5 = sessionStorage.getItem("character5");
-        const team =  await get_team(char1,char2,char3,char4,char5);
-        apply_images(team.data[0].image,1);
-        apply_names(team.data[0].name,1);
+        const team =  await get_team([char1,char2,char3,char4,char5]);
+        apply_images(team[0].data.image,1);
+        apply_names(team[0].data.name,1);
 
-        apply_images(team.data[1].image,2);
-        apply_names(team.data[1].name,2);
+        apply_images(team[1].data.image,2);
+        apply_names(team[1].data.name,2);
 
-        apply_images(team.data[2].image,3);
-        apply_names(team.data[2].name,3);
+        apply_images(team[2].data.image,3);
+        apply_names(team[2].data.name,3);
 
-        apply_images(team.data[3].image,4);
-        apply_names(team.data[3].name,4);
+        apply_images(team[3].data.image,4);
+        apply_names(team[3].data.name,4);
 
-        apply_images(team.data[4].image,5);
-        apply_names(team.data[4].name,5);
+        apply_images(team[4].data.image,5);
+        apply_names(team[4].data.name,5);
 
         console.log(team);
     
@@ -33,9 +33,17 @@ async function get_characters(){
     }
 }
 
-async function get_team(var1, var2, var3, var4, var5){
-    const team = await axios.get(`https://rickandmortyapi.com/api/character/${var1},${var2},${var3},${var4},${var5}`);
-    return team;
+async function get_team(team_ids){
+    let our_team = [];
+    for(member of team_ids){
+        console.log(member);
+        let member_obj = await axios.get(`https://rickandmortyapi.com/api/character/${member}`);
+        our_team.push(member_obj);
+        console.log(member_obj);
+    }
+
+    console.log(our_team);
+    return our_team;
 }
 
 async function apply_images(img, id){

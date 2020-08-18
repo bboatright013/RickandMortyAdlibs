@@ -1,6 +1,7 @@
 $(document).ready(get_characters);
 sessionStorage.clear();
 
+const $character_popup = $('.character-popup');
 const $new_team = $('.new-team');
 const $confirm_team = $('.confirm-team');
 const $roster = $('.roster');
@@ -34,6 +35,7 @@ for(let x = 0; x <= start_count; x++){
     sessionStorage.setItem(`character${x+1}`,roster[x])
 }
 console.log('team confirmed');
+$character_popup.css({ "display": "block", "visibility": "visible" })
 })
 
 

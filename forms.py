@@ -3,7 +3,7 @@
 from wtforms import SelectField, StringField, PasswordField
 from flask_wtf import FlaskForm
 from wtforms_alchemy import model_form_factory
-from wtforms.validators import DataRequired, Email, Length
+from wtforms.validators import DataRequired, Email, Length, email_validator
 
 from models import db, User
 
@@ -15,7 +15,7 @@ class ModelForm(BaseModelForm):
         return db.session
 
 class UserForm(ModelForm):
-    """Form for adding playlists."""
+    """Form for adding users."""
     class Meta:
         model = User
 
@@ -34,3 +34,8 @@ class AdlibForm(FlaskForm):
     word5 = StringField('Adverb', validators=[DataRequired()])
     word6 = StringField('Verb', validators=[DataRequired()])
 
+class UserEditForm(FlaskForm):
+    """edit user form """
+    email = StringField('E-mail', validators=[Email()])
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password Verification Required:', validators=[DataRequired()])
